@@ -1,0 +1,22 @@
+{
+  "name": "time-clock",
+  "version": "0.0.0",
+  "description": "Simple time clock application",
+  "main": "server/main.js",
+  "scripts": {
+    "start": "node server/main.js",
+    "dev": "nodemon --ignore server/data/ server/main.js"
+  },
+  "author": "Samuel Scheiderich",
+  "license": "0BSD",
+  "devDependencies": {
+    "eslint": "^4.3.0",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "express": "^4.15.3",
+    "jsonfile": "^3.0.1",
+    "moment": "^2.18.1",
+    "pug": "^2.0.0-rc.2"
+  }
+}

@@ -1,0 +1,39 @@
+doctype html
+html(class="no-js" lang="")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="x-ua-compatible" content="ie=edge")
+    title Time clock
+    meta(name="description" content="")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+
+    link(rel="apple-touch-icon" href="apple-touch-icon.png")
+    link(rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous")
+    script(src="js/vendor/modernizr-2.8.3.min.js")
+  body
+    div
+      h1 Time Clock
+      div(class="button-container")
+        form(action="/clock-in" method="POST" style="display:inline-block")
+          button(class="pure-button pure-button-primary") Clock In
+        | 
+        form(action="/clock-out" method="POST" style="display:inline-block")
+          button(class="pure-button pure-button-primary") Clock Out
+        |
+        span='Total time: ' + getTimeReadable(totalTime)
+      div(class="timesheet")
+        table(class="pure-table")
+          tr
+            th Session #
+            th Total Time
+            th Clock In
+            th Clock Out
+          each timeset, index in timesheet
+            tr
+              td=timeset.sessionNumber
+              td=timeset.clockOut == null ? 'n/a' : getTimeReadable(timeset.clockOut - timeset.clockIn)
+              td=moment.unix(timeset.clockIn).format('dddd, MMMM Do YYYY, h:mm:ss a')
+              td=timeset.clockOut == null ? moment().format('dddd, MMMM Do YYYY, h:mm:ss a') : moment.unix(timeset.clockOut).format('dddd, MMMM Do YYYY, h:mm:ss a')
+              td
+                form(action=`/delete-record/${index}` method="POST")
+                  button(class="pure-button" style="background: rgb(202, 60, 60)") Delete
