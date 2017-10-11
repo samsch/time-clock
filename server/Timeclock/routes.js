@@ -12,7 +12,7 @@ const isIn = timesheet =>
 
 const calcTotalTime = timesheet => {
   return timesheet.reduce((acc, row) => {
-    return acc + ((row.clockOut || now) - row.clockIn);
+    return acc + ((row.clockOut == null ? now() : row.clockOut) - row.clockIn);
   }, 0);
 };
 

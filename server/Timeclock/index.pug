@@ -12,7 +12,9 @@ html(class="no-js" lang="")
     script(src="js/vendor/modernizr-2.8.3.min.js")
   body
     div
-      h1 Time Clock
+      h1
+        | Time Clock
+        span= ' (Current clocked ' + status.toUpperCase() + ')'
       div(class="button-container")
         form(action="/clock-in" method="POST" style="display:inline-block")
           button(class="pure-button pure-button-primary") Clock In
@@ -20,7 +22,7 @@ html(class="no-js" lang="")
         form(action="/clock-out" method="POST" style="display:inline-block")
           button(class="pure-button pure-button-primary") Clock Out
         |
-        span='Total time: ' + getTimeReadable(totalTime)
+        span=' Total time: ' + getTimeReadable(totalTime)
       div(class="timesheet")
         table(class="pure-table")
           tr
@@ -31,7 +33,7 @@ html(class="no-js" lang="")
           each timeset, index in timesheet
             tr
               td=timeset.sessionNumber
-              td=timeset.clockOut == null ? 'n/a' : getTimeReadable(timeset.clockOut - timeset.clockIn)
+              td=timeset.clockOut == null ? 'Pending: ' + getTimeReadable(moment().format('X') - timeset.clockIn) : getTimeReadable(timeset.clockOut - timeset.clockIn)
               td=moment.unix(timeset.clockIn).format('dddd, MMMM Do YYYY, h:mm:ss a')
               td=timeset.clockOut == null ? moment().format('dddd, MMMM Do YYYY, h:mm:ss a') : moment.unix(timeset.clockOut).format('dddd, MMMM Do YYYY, h:mm:ss a')
               td
