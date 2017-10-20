@@ -18,6 +18,6 @@ app.get('/test', function(req, res) {
   res.send('Hello World!');
 });
 
-app.listen(3000, function() {
-  global.console.log('Example app listening on port 3000!');
+app.listen(3479, function() {
+  global.console.log('time-clock listening on port 3479!');
 });
