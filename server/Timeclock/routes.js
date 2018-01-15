@@ -4,6 +4,7 @@ const store = require('jsonfile');
 const moment = require('moment');
 
 const FILENAME = process.env.DATA_FILE_NAME || './server/data/timesheet.json';
+const fileShortName = (/\/([^/]+)\.[^/]+$/.exec(FILENAME) || [null ,'timesheet [default]'])[1];
 
 const now = () => +moment().format('X');
 
@@ -33,6 +34,7 @@ router.get('/', function(req, res) {
     timesheet: req.timesheet,
     totalTime: calcTotalTime(req.timesheet),
     status: isIn(req.timesheet) ? 'in' : 'out',
+    fileName: fileShortName,
   });
 });
 

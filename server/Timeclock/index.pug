@@ -10,11 +10,15 @@ html(class="no-js" lang="")
     link(rel="apple-touch-icon" href="apple-touch-icon.png")
     link(rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous")
     script(src="js/vendor/modernizr-2.8.3.min.js")
+    style
+      | body > div { max-width: 1920px; margin: auto; }
+      | body > div > div { margin-top: 1rem; }
   body
     div
       h1
-        | Time Clock
+        | Time Clock -
         span= ' (Current clocked ' + status.toUpperCase() + ')'
+      h3=fileName
       div(class="button-container")
         form(action="/clock-in" method="POST" style="display:inline-block")
           button(class="pure-button pure-button-primary") Clock In
