@@ -3,7 +3,7 @@ const router = express.Router();
 const store = require('jsonfile');
 const moment = require('moment');
 
-const FILENAME = './server/data/timesheet.json';
+const FILENAME = process.env.DATA_FILE_NAME || './server/data/timesheet.json';
 
 const now = () => +moment().format('X');
 
